@@ -80,11 +80,11 @@ prepare: ${SRC_DIR}/*
 	mkdir -p ${OBJ_DIRS}
 
 image: prepare mbr loader kernel disk
-	rm -rf scroll.img && bximage -hd -mode="flat" -size=3 -q scroll.img 1>/dev/null
-	dd if=$(BIN_DIR)/mbr of=scroll.img bs=512 count=1 seek=0 conv=notrunc
-	dd if=$(BIN_DIR)/loader of=scroll.img bs=512 count=8 seek=1 conv=notrunc
-	dd if=$(BIN_DIR)/kernel of=scroll.img bs=512 count=2048 seek=9 conv=notrunc
-	dd if=$(USER_DIR)/user_disk_image of=scroll.img bs=512 count=2048 seek=2057 conv=notrunc
+	rm -rf luck.img && bximage -hd -mode="flat" -size=3 -q luck.img 1>/dev/null
+	dd if=$(BIN_DIR)/mbr of=luck.img bs=512 count=1 seek=0 conv=notrunc
+	dd if=$(BIN_DIR)/loader of=luck.img bs=512 count=8 seek=1 conv=notrunc
+	dd if=$(BIN_DIR)/kernel of=luck.img bs=512 count=2048 seek=9 conv=notrunc
+	dd if=$(USER_DIR)/user_disk_image of=luck.img bs=512 count=2048 seek=2057 conv=notrunc
 
 mbr: $(SRC_DIR)/boot/mbr.S
 	nasm -o $(BIN_DIR)/mbr $<
@@ -207,5 +207,5 @@ $(OBJ_DIR)/utils/%.o: $(SRC_DIR)/utils/%.S
 
 
 clean:
-	rm -rf ${OBJ_DIR}/* ${BIN_DIR}/* scroll.img bochsout.txt kernel_dump.txt
+	rm -rf ${OBJ_DIR}/* ${BIN_DIR}/* luck.img bochsout.txt kernel_dump.txt
 	cd ./${USER_DIR} && make clean

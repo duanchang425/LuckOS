@@ -13,7 +13,7 @@
 #include "utils/debug.h"
 #include "utils/id_pool.h"
 
-char* welcome = " welcome to scroll kernel\n";
+char* welcome = " welcome to LuckOS kernel\n";
 
 static void print_welcome() {
   monitor_print_with_color("#", COLOR_GREEN);
